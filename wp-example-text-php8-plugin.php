@@ -16,6 +16,30 @@
 
 namespace salcode\WpExampleTestPhp8;
 
+use WP_REST_Server;
+
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
+
+/**
+ * Register routes for REST API.
+ */
+function register_rest_api_routes() {
+	register_rest_route(
+		'wp-example-test-php8-plugin/v1',
+		'/site-title',
+		[
+			'callback' => function() {
+				return 'hello world';
+			},
+			'methods' => WP_REST_Server::READABLE,
+			'permission_callback' => '__return_true',
+		]
+	);
+}
+
+add_action(
+	'rest_api_init',
+	__NAMESPACE__ . '\register_rest_api_routes'
+);
