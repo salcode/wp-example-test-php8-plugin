@@ -14,9 +14,20 @@ class SiteTitle {
 	 * @return \WP_REST_Response The response to the request.
 	 */
 	public static function get() {
+		$z = 5;
+		$z[] = 8;
+
+		$a = [ 'a', 'b', 'c', 'd' ];
+		$b = each( $a );
+		$c = $a{2};
 		try {
 			return new WP_REST_Response(
-				get_option( 'blogname' ),
+				[
+					'siteTitle' => get_option( 'blogname' ),
+					'b' => $b,
+					'c' => $c,
+					'z' => $z,
+				],
 				200
 			);
 		} catch (Throwable $t) {
