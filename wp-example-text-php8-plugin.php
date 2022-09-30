@@ -16,6 +16,7 @@
 
 namespace salcode\WpExampleTestPhp8;
 
+use salcode\WpExampleTestPhp8\RestEndpoints\SiteTitle;
 use WP_REST_Server;
 
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
@@ -30,9 +31,7 @@ function register_rest_api_routes() {
 		'wp-example-test-php8-plugin/v1',
 		'/site-title',
 		[
-			'callback' => function() {
-				return 'hello world';
-			},
+			'callback' => [ SiteTitle::class, 'get' ],
 			'methods' => WP_REST_Server::READABLE,
 			'permission_callback' => '__return_true',
 		]
